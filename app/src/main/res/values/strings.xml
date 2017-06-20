@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PADC-NetworkLayer</string>
+    <string name="action_settings">Settings</string>
+    <string name="label_restaurant_title">Shar Jyoon Pyan</string>
+    <string name="label_total_rating">(145)</string>
+    <string name="label_delivery_time">45 min.</string>
+    <string name="label_tags">Halal, European</string>
+</resources>
