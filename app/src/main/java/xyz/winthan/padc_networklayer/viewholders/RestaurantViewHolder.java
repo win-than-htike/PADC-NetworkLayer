@@ -62,7 +62,11 @@ public class RestaurantViewHolder extends BaseViewHolder<RestaurantVO> {
                 .error(R.drawable.store)
                 .into(ivRestaurant);
 
-        tvRestaurantTitle.setText(data.getTitle());
+        if (data.getAddrShort() != null){
+            tvRestaurantTitle.setText(data.getTitle() + " (" + data.getAddrShort() + ")");
+        }else {
+            tvRestaurantTitle.setText(data.getTitle());
+        }
 
         tvDeliverTime.setText(data.getLeadTimeinMin()+" min.");
 
