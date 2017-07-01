@@ -5,4 +5,5 @@
     <string name="label_total_rating">(145)</string>
     <string name="label_delivery_time">45 min.</string>
     <string name="label_tags">Halal, European</string>
+    <string name="content_authority">xyz.winthan.padc_networklayer</string>
 </resources>

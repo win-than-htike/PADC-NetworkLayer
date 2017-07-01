@@ -8,4 +8,6 @@ public class RestaurantConstants {
 
     public static final String BASE_URL = "http://aungpyaephyo.xyz/restaurants/";
 
+    public static final int RESTAURANT_LIST_LOADER = 1000;
+
 }

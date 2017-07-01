@@ -1,5 +1,7 @@
 package xyz.winthan.padc_networklayer.data.network;
 
+import android.content.Context;
+
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.concurrent.TimeUnit;
@@ -54,7 +56,7 @@ public class RetrofitDataAgent implements RestaurantDataAgent{
 
 
     @Override
-    public void loadRestaurant() {
+    public void loadRestaurant(final Context context) {
 
         Call<RestaurantResponse> call = mService.loadRestaurant();
         call.enqueue(new Callback<RestaurantResponse>() {
@@ -68,7 +70,7 @@ public class RetrofitDataAgent implements RestaurantDataAgent{
 
                 }else {
 
-                    EventBus.getDefault().post(new DataEvent.RestaurantDataLoadedEvent(restaurantResponse.getRestaurantVOList()));
+                    EventBus.getDefault().post(new DataEvent.RestaurantDataLoadedEvent(context, restaurantResponse.getRestaurantVOList()));
 
                 }
 

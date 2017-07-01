@@ -17,22 +17,35 @@
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/iv_restaurant"
+        android:layout_alignTop="@id/iv_restaurant"
         android:layout_marginLeft="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
-        android:layout_toEndOf="@+id/iv_restaurant"
-        android:layout_toRightOf="@+id/iv_restaurant"
+        android:layout_toEndOf="@id/iv_restaurant"
+        android:layout_toRightOf="@id/iv_restaurant"
         android:rating="5" />
 
     <TextView
         android:id="@+id/tv_total_rating_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/iv_restaurant"
+        android:layout_alignTop="@id/iv_restaurant"
         android:layout_marginLeft="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_medium"
-        android:layout_toRightOf="@+id/rb_restaurant_rating"
+        android:layout_toRightOf="@id/rb_restaurant_rating"
         android:text="@string/label_total_rating" />
+
+    <TextView
+        android:id="@+id/tv_new_restaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Helloasdfasfa"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/margin_medium"
+        android:layout_alignBaseline="@id/tv_total_rating_count"
+        android:layout_alignBottom="@id/tv_total_rating_count"
+        android:layout_toRightOf="@id/tv_total_rating_count"
+        android:layout_toEndOf="@id/tv_total_rating_count"
+        android:textColor="@color/colorAccent"/>
 
     <TextView
         android:id="@+id/tv_restaurant_title"
@@ -40,8 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/margin_medium"
-        android:layout_toEndOf="@+id/iv_restaurant"
-        android:layout_toRightOf="@+id/iv_restaurant"
+        android:layout_toEndOf="@id/iv_restaurant"
+        android:layout_toRightOf="@id/iv_restaurant"
         android:ellipsize="end"
         android:maxLines="1"
         android:paddingBottom="@dimen/activity_vertical_margin"
@@ -60,13 +73,6 @@
         android:src="@drawable/ads" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_restaurant"
-        android:layout_toLeftOf="@+id/tv_deliver_time"
-        android:text="delivers in " />
-
-    <TextView
         android:id="@+id/tv_deliver_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,12 +85,19 @@
         android:textStyle="bold" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_restaurant"
+        android:layout_toLeftOf="@id/tv_deliver_time"
+        android:text="delivers in " />
+
+    <TextView
         android:id="@+id/tv_tags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/iv_restaurant"
-        android:layout_alignLeft="@+id/tv_restaurant_title"
-        android:layout_alignStart="@+id/tv_restaurant_title"
+        android:layout_alignLeft="@id/tv_restaurant_title"
+        android:layout_alignStart="@id/tv_restaurant_title"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/margin_medium"
         android:maxLines="1"
@@ -94,7 +107,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/tv_deliver_time"
+        android:layout_below="@id/tv_deliver_time"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:background="#2f000000"/>

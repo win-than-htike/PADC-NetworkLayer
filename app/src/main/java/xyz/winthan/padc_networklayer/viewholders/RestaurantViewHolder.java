@@ -38,6 +38,9 @@ public class RestaurantViewHolder extends BaseViewHolder<RestaurantVO> {
     @BindView(R.id.tv_tags)
     TextView tvTags;
 
+    @BindView(R.id.tv_new_restaurant)
+    TextView tvNewRestaurant;
+
     private RestaurantVO mRestaurant;
 
     public RestaurantViewHolder(View itemView) {
@@ -66,6 +69,12 @@ public class RestaurantViewHolder extends BaseViewHolder<RestaurantVO> {
             tvRestaurantTitle.setText(data.getTitle() + " (" + data.getAddrShort() + ")");
         }else {
             tvRestaurantTitle.setText(data.getTitle());
+        }
+
+        if (data.isNew()) {
+            tvNewRestaurant.setText("New!");
+        }else {
+            tvNewRestaurant.setText("");
         }
 
         tvDeliverTime.setText(data.getLeadTimeinMin()+" min.");

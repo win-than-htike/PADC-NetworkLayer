@@ -1,5 +1,7 @@
 package xyz.winthan.padc_networklayer.events;
 
+import android.content.Context;
+
 import java.util.List;
 
 import xyz.winthan.padc_networklayer.data.vos.RestaurantVO;
@@ -14,8 +16,15 @@ public class DataEvent {
 
         private List<RestaurantVO> restaurantVOList;
 
-        public RestaurantDataLoadedEvent(List<RestaurantVO> restaurantVOList) {
+        private Context context;
+
+        public RestaurantDataLoadedEvent(Context context, List<RestaurantVO> restaurantVOList) {
             this.restaurantVOList = restaurantVOList;
+            this.context = context;
+        }
+
+        public Context getContext() {
+            return context;
         }
 
         public List<RestaurantVO> getRestaurantVOList() {
