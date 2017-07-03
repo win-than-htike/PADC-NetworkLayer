@@ -16,10 +16,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        RetrofitDataAgent.getInstance().loadRestaurant(getApplicationContext());
-
-        RestaurantModel.getInstance();
-
     }
 
 }

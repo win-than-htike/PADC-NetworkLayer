@@ -22,7 +22,7 @@ public class RestaurantDbHelper extends SQLiteOpenHelper {
             RestaurantContract.RestaurantEntry.COLUMN_AVDERAGE_RATING_VALUE + " REAL, " +
             RestaurantContract.RestaurantEntry.COLUMN_IS_ADS + " INTEGER NOT NULL, " +
             RestaurantContract.RestaurantEntry.COLUMN_IS_NEW + " INTEGER NOT NULL, " +
-            RestaurantContract.RestaurantEntry.COLUMN_LEAD_TIME_IN_MIN + " TEXT, " +
+            RestaurantContract.RestaurantEntry.COLUMN_LEAD_TIME_IN_MIN + " INTEGER NOT NULL, " +
 
             " UNIQUE (" + RestaurantContract.RestaurantEntry.COLUMN_TITLE + ") ON CONFLICT IGNORE" +
             " );";

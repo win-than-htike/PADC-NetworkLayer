@@ -1,22 +1,19 @@
 package xyz.winthan.padc_networklayer.activities;
 
 import android.database.Cursor;
-import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +24,12 @@ import xyz.winthan.padc_networklayer.R;
 import xyz.winthan.padc_networklayer.adapters.RestaurantRvAdapter;
 import xyz.winthan.padc_networklayer.data.persistence.RestaurantContract;
 import xyz.winthan.padc_networklayer.data.vos.RestaurantVO;
-import xyz.winthan.padc_networklayer.events.DataEvent;
+import xyz.winthan.padc_networklayer.mvp.presenters.BasePresenter;
+import xyz.winthan.padc_networklayer.mvp.presenters.RestaurantListPresenter;
 import xyz.winthan.padc_networklayer.mvp.views.RestaurantListView;
 import xyz.winthan.padc_networklayer.utils.RestaurantConstants;
 
-public class MainActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class HomeActivity extends BaseActivity implements RestaurantListView, LoaderManager.LoaderCallbacks<Cursor> {
 
     @BindView(R.id.rv_restaurants)
     RecyclerView rvRestaurants;
@@ -41,11 +39,17 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
 
     private RestaurantRvAdapter mAdapter;
 
+    private RestaurantListPresenter mPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
         ButterKnife.bind(this, this);
+
+        mPresenter = new RestaurantListPresenter(this, this);
+        mPresenter.onCreate();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -62,25 +66,39 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return false;
+    protected void onStart() {
+        super.onStart();
+        mPresenter.onStart();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    protected void onStop() {
+        super.onStop();
+        mPresenter.onStop();
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestory();
+    }
 
-        return super.onOptionsItemSelected(item);
+    @Override
+    public void displayRestaurantList(List<RestaurantVO> restaurantVOList) {
+
+        loading.setVisibility(View.GONE);
+        mAdapter.setNewData(restaurantVOList);
+
+    }
+
+    @Override
+    public void displayFailToLoadError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean isEmptyRestaurantList() {
+        return false;
     }
 
     @Override
@@ -101,7 +119,6 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
         Log.i("data count => ", data.getCount()+"");
         if (data != null && data.moveToFirst()){
 
-            loading.setVisibility(View.GONE);
 
             do {
 
@@ -111,15 +128,18 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
 
             }while (data.moveToNext());
 
-            mAdapter.setNewData(restaurantVOList);
+            mPresenter.loadRestaurantFromDb(restaurantVOList);
 
         }else {
             loading.setVisibility(View.VISIBLE);
+            mPresenter.loadRestaurantData();
         }
+
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
     }
+
 }

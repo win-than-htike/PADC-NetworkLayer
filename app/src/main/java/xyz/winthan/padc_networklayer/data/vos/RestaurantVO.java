@@ -134,6 +134,7 @@ public class RestaurantVO {
         values.put(RestaurantContract.RestaurantEntry.COLUMN_AVDERAGE_RATING_VALUE, averageRatingValue);
         values.put(RestaurantContract.RestaurantEntry.COLUMN_IS_ADS, isAd);
         values.put(RestaurantContract.RestaurantEntry.COLUMN_IS_NEW, isNew);
+        values.put(RestaurantContract.RestaurantEntry.COLUMN_LEAD_TIME_IN_MIN, leadTimeinMin);
         return values;
 
     }
@@ -148,6 +149,7 @@ public class RestaurantVO {
         restaurantVO.averageRatingValue = data.getFloat(data.getColumnIndex(RestaurantContract.RestaurantEntry.COLUMN_AVDERAGE_RATING_VALUE));
         restaurantVO.isAd = data.getInt(data.getColumnIndex(RestaurantContract.RestaurantEntry.COLUMN_IS_ADS)) > 0;
         restaurantVO.isNew = data.getInt(data.getColumnIndex(RestaurantContract.RestaurantEntry.COLUMN_IS_NEW)) > 0;
+        restaurantVO.leadTimeinMin = data.getInt(data.getColumnIndex(RestaurantContract.RestaurantEntry.COLUMN_LEAD_TIME_IN_MIN));
         return restaurantVO;
 
     }
